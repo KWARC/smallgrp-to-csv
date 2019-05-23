@@ -1,3 +1,5 @@
+LoadPackage("crisp");
+
 write_smallgrp_csv := function(fname, order_range, nr_threads)
   local out, funcs, nrgroups, groups_started, start_time, func, children, 
         range_index, size, nrgroupssize, id, time_so_far, time_per_gp, 
