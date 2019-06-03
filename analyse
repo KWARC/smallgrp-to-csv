@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "Finding completed group numbers..."
+LINES=$(grep --color=never "^512," $1 | sort -n | sed 's/^512,//g' | sed 's/,.*$//g')
+
+echo "Searching for missing groups..."
+I=0
+FIRST_MISSING=0
+for line in $LINES
+do
+    I=$(($I + 1))
+    while (($I < $line))
+    do
+        echo Missing $I
+        if ((FIRST_MISSING == 0))
+        then
+            FIRST_MISSING=$I
+        fi
+        I=$(($I + 1))
+    done
+done
+
+echo Last result is $I
+echo All but the last $(($I - $FIRST_MISSING + 1)) results are found
