@@ -15,6 +15,6 @@ probably feasible.
 
 We probably want to fix the output by running
 
-    $ awk '/\\$/ { printf("%s", $0); next } 1' out.csv | sort -n > sorted.csv
+    $ awk '/\\$/ { printf("%s", $0); next } 1' out.csv | sort -V > sorted.csv
 
 to clean up line breaks and sort the results.
