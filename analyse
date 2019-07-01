@@ -20,4 +20,7 @@ do
 done
 
 echo Last result is $I
-echo All but the last $(($I - $FIRST_MISSING + 1)) results are found
+if ((FIRST_MISSING != 0))
+then
+    echo All but the last $(($I - $FIRST_MISSING + 1)) results are found
+fi
