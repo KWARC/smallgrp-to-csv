@@ -15,6 +15,15 @@ probably feasible.
 
 We probably want to fix the output by running
 
-    $ awk '/\\$/ { printf("%s", $0); next } 1' out.csv | sort -V > sorted.csv
+    $ cat *.csv | sed ':a;N;$!ba;s/\\\n//g' | sort -Vu | sed '1h;1d;$!H;$!d;G' > all.csv
 
-to clean up line breaks and sort the results.
+a pipeline which does the following:
+
+    * concatenates all csv files in the directory
+    * cleans up line breaks
+    * sorts the results
+    * moves the header line back to the start
+
+This has now been run to completion for [1 .. 1023], resulting in a file of size
+915 MB (or 49MB after gz compression).  That's probably too big to put in this
+repository.
