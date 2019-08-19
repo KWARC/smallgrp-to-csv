@@ -27,3 +27,9 @@ a pipeline which does the following:
 This has now been run to completion for [1 .. 1023], resulting in a file of size
 915 MB (or 49MB after gz compression).  That's probably too big to put in this
 repository.
+
+To get a json file out of this (in the format KB suggested) we can run
+
+    $ sed '1s/^.*$/\[/;s/^\(\([0-9]*,\)\{2\}\(true,\|false,\)\{4\}\([0-9]*,\)\)\([0-9]*,[0-9]*\),\(.*\)$/  [\1[\5],"\6"],/g;$a\]' all.csv > all.json
+
+and use `all.json` to create a server!
