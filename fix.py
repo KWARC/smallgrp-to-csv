@@ -11,7 +11,7 @@ with open("all.json") as infile:
         for lineno, line in enumerate(infile):
             if ",fail," in line:
                 org = line
-                line = re.sub(REGEX, r'[\1,\2,\3,\4,\5,\6,null,\8,\9,"\10"],', line)
+                line = re.sub(REGEX, r'[\1,\2,\3,\4,\5,\6,null,[\8,\9],"\10"],', line)
             outfile.write(line)
         replace_line = lineno - 1
 
@@ -31,8 +31,13 @@ with open("all.json") as infile:
     data = json.load(infile)
 
 data = [
-    row[0:6] + row[7:10] for row in data if row[0] <= ORDER_UP_TO
+    row[0:6] + row[7:9] for row in data if row[0] <= ORDER_UP_TO
 ]
+
+for row in data:
+    print(row)
+    if len(row) != 8:
+        print("FAILURE")
 
 print("Writing final result of {} items".format(len(data)))
 with open("all.json", "w") as outfile:
