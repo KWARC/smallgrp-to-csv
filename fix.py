@@ -35,7 +35,6 @@ data = [
 ]
 
 for row in data:
-    print(row)
     if len(row) != 8:
         print("FAILURE")
 
